@@ -23,14 +23,11 @@ a:hover {
 }
 
 body {
-  margin: 0;
-  font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
-  color: white;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 100vh;  /* Ajuste aqui para garantir a altura mínima */
+  body {
+    margin: 0;
+    background-color: #0f0c29;
+  }
+   /* Ajuste aqui para garantir a altura mínima */
 }
 
 
