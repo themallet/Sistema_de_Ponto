@@ -1,40 +1,14 @@
+// src/App.jsx
 import React from 'react';
 import './App.css';
-import logo from './assets/simbolo_newbyte.png';
-import bg from './assets/background.png';
+import LoginLeft from './components/LoginLeft';  // Import LoginLeft
+import LoginRight from './components/LoginRight';  // Import LoginRight
 
 function App() {
   return (
     <div className="login-container">
-      {/* Lado esquerdo com imagem */}
-      <div
-        className="login-left"
-        style={{ backgroundImage: `url(${bg})` }}
-      ></div>
-
-      {/* Lado direito com o formulário */}
-      <div className="login-right">
-        <div className="login-box">
-          <img src={logo} alt="Logo NewByte" className="logo" />
-          <h2>Bem Vindo!</h2>
-
-          <form>
-            <input type="text" placeholder="ID Empresarial" />
-            <div className="password-field">
-              <input type="password" placeholder="Senha" />
-              <span className="eye-icon">👁️</span> {/* Pode trocar depois */}
-            </div>
-
-            <button type="submit">Entrar</button>
-          </form>
-
-          <div className="help-text">
-            Problemas no Login? <a href="#">Fale Conosco</a>
-          </div>
-
-          <footer>© NewByte - 2025</footer>
-        </div>
-      </div>
+      <LoginLeft />  {/* Left side with image */}
+      <LoginRight />  {/* Right side with form */}
     </div>
   );
 }
