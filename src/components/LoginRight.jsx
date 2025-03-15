@@ -1,8 +1,13 @@
-// src/components/LoginRight.jsx
-import React from 'react';
-import logo from '../assets/simbolo_newbyte.png'; // Adjust path as necessary
+import React, { useState } from 'react';
+import logo from '../assets/simbolo_newbyte.png';
 
 const LoginRight = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
+  };
+
   return (
     <div className="login-right">
       <div className="login-box">
@@ -11,9 +16,15 @@ const LoginRight = () => {
 
         <form>
           <input type="text" placeholder="ID Empresarial" />
+
           <div className="password-field">
-            <input type="password" placeholder="Senha" />
-            <span className="eye-icon">👁️</span> {/* Can change later */}
+            <input
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Senha"
+            />
+            <span className="eye-icon" onClick={togglePassword}>
+              {showPassword ? '🙈' : '👁️'}
+            </span>
           </div>
 
           <button type="submit">Entrar</button>
