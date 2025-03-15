@@ -1,21 +1,11 @@
-import React, { useState } from "react";
-import logo from "../assets/simbolo_newbyte.png"; // Keep your logo import
+import React, { useState } from 'react';
+import logo from '../assets/simbolo_newbyte.png';
 
 const LoginRight = () => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    if (!id || !password) {
-      setError("Por favor, preencha todos os campos.");
-      return;
-    }
-
-    console.log("Logging in with:", { id, password });
-    setError(""); // Clear errors if successful
+  const togglePassword = () => {
+    setShowPassword((prev) => !prev);
   };
 
   return (
@@ -24,24 +14,18 @@ const LoginRight = () => {
         <img src={logo} alt="Logo NewByte" className="logo" />
         <h2>Bem Vindo!</h2>
 
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="ID Empresarial"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
+        <form>
+          <input type="text" placeholder="ID Empresarial" />
+
           <div className="password-field">
             <input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               placeholder="Senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
             />
-            <span className="eye-icon">👁️</span>
+            <span className="eye-icon" onClick={togglePassword}>
+              {showPassword ? '🙈' : '👁️'}
+            </span>
           </div>
-
-          {error && <p className="error-message">{error}</p>}
 
           <button type="submit">Entrar</button>
         </form>
