@@ -55,15 +55,51 @@ h2 {
   color: #333;
 }
 
+/* Password field and input wrapper styling */
+.password-field {
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* Eye icon positioning */
+.eye-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 15px;
+  cursor: pointer;
+  font-size: 20px;
+  z-index: 2;
+}
+
+/* Error message styling */
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 2px;
+  margin-bottom: 8px;
+  display: block;
+  text-align: left;
+}
+
 /* Campos de input */
 input[type="text"],
 input[type="password"] {
   width: 100%;
   padding: 12px 15px;
-  margin: 10px 0;
+  margin: 5px 0;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
+}
+
+.input-wrapper input {
+  padding-right: 40px; /* Make room for the eye icon */
 }
 
 /* Botão */
@@ -101,25 +137,33 @@ footer {
   font-size: 12px;
   color: #999;
 }
-
-/* Ícone olho na senha */
-.password-field {
-  position: relative;
+/* Spinner Style */
+.spinner {
+  border: 4px solid #f3f3f3; /* Light background */
+  border-top: 4px solid #007bff; /* Blue color */
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite; /* Make it spin */
+  display: inline-block;
+  margin-right: 10px; /* Space between spinner and text */
 }
 
-.eye-icon {
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  cursor: pointer;
-  font-size: 20px; /* Adjust size */
+/* Keyframes for spinning */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
-/* Mensagem de erro */
-.error-message {
-  color: red;
-  font-size: 14px;
-  margin-top: 8px;
-  text-align: left;
-  padding-left: 5px;
+
+/* Button state while loading */
+button:disabled {
+  background-color: #ccc; /* Change background when loading */
+  cursor: not-allowed; /* Disable the cursor */
+}
+
+/* Adjust the button text and spinner alignment */
+button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -2,29 +2,64 @@ import React, { useState } from 'react';
 import logo from '../assets/simbolo_newbyte.png'; // Adjust path as necessary
 
 const LoginRight = () => {
-  // State for the form fields and error message
-  const [id, setId] = useState('');
-  const [password, setPassword] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
-  const [passwordVisible, setPasswordVisible] = useState(false); // Track password visibility
+  const [loading, setLoading] = useState(false); // Loading state
+  const [formData, setFormData] = useState({
+    username: '',
+    password: ''
+  });
+  const [errors, setErrors] = useState({
+    username: false,
+    password: false
+  });
+  const [passwordVisible, setPasswordVisible] = useState(false); // State for password visibility
 
-  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent page refresh
+    e.preventDefault();
+    
+    // Reset errors
+    setErrors({
+      username: false,
+      password: false
+    });
 
-    if (!id || !password) {
-      setErrorMessage('Por favor, preencha todos os campos');
-      return;
+    // Check for empty fields
+    let formValid = true;
+    let newErrors = {};
+
+    if (!formData.username) {
+      formValid = false;
+      newErrors.username = true;
+    }
+    if (!formData.password) {
+      formValid = false;
+      newErrors.password = true;
     }
 
-    // Here you would add logic to check the credentials
-    setErrorMessage('');
-    console.log('ID:', id, 'Password:', password);
+    setErrors(newErrors);
+
+    // If the form is valid, simulate loading
+    if (formValid) {
+      setLoading(true);
+      
+      // Simulate a backend call
+      setTimeout(() => {
+        // Simulate successful login (for now)
+        setLoading(false);
+        alert('Login successful (simulated)');
+      }, 2000); // Adjust the time as needed
+    }
   };
 
-  // Toggle password visibility
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
   const togglePasswordVisibility = () => {
-    setPasswordVisible(!passwordVisible);
+    setPasswordVisible(!passwordVisible); // Toggle the visibility
   };
 
   return (
@@ -34,29 +69,43 @@ const LoginRight = () => {
         <h2>Bem Vindo!</h2>
 
         <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            placeholder="ID Empresarial"
-            value={id}
-            onChange={(e) => setId(e.target.value)}
-          />
-          <div className="password-field">
+          <div>
             <input
-              type={passwordVisible ? 'text' : 'password'} // Toggle between 'text' and 'password'
-              placeholder="Senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              type="text"
+              placeholder="ID Empresarial"
+              name="username"
+              value={formData.username}
+              onChange={handleChange}
+              className={errors.username ? 'error' : ''}
             />
-            <span className="eye-icon" onClick={togglePasswordVisibility}>
-              {passwordVisible ? '🙈' : '👁️'} {/* Toggle eye icon */}
-            </span>
+            {errors.username && <span className="error-message">Este campo é obrigatório</span>}
           </div>
 
-          <button type="submit">Entrar</button>
-        </form>
+          <div className="password-field">
+            <div className="input-wrapper">
+              <input
+                type={passwordVisible ? "text" : "password"}
+                placeholder="Senha"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                className={errors.password ? 'error' : ''}
+              />
+              <span className="eye-icon" onClick={togglePasswordVisibility}>
+                {passwordVisible ? '🙈' : '👁️'}
+              </span>
+            </div>
+            {errors.password && <span className="error-message">Este campo é obrigatório</span>}
+          </div>
 
-        {/* Conditionally show the error message */}
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
+          <button type="submit" disabled={loading}>
+            {loading ? (
+              <div className="spinner"></div>
+            ) : (
+              'Entrar'
+            )}
+          </button>
+        </form>
 
         <div className="help-text">
           Problemas no Login? <a href="#">Fale Conosco</a>
