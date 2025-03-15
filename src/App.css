@@ -113,6 +113,7 @@ footer {
   right: 15px;
   transform: translateY(-50%);
   cursor: pointer;
+  font-size: 20px; /* Adjust size */
 }
 /* Mensagem de erro */
 .error-message {
