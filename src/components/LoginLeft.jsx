@@ -1,6 +1,6 @@
 // src/components/LoginLeft.jsx
 import React from 'react';
-import bg from '../assets/background.png'; // Adjust path as necessary
+import bg from '../assets/image.png'; // Adjust path as necessary
 
 const LoginLeft = () => {
   return (
