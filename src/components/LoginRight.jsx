@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import for navigation
 import logo from '../assets/simbolo_newbyte.png'; // Adjust path as necessary
 
 const LoginRight = () => {
+  const navigate = useNavigate(); // Hook for navigation
   const [loading, setLoading] = useState(false); // Loading state
   const [formData, setFormData] = useState({
     username: '',
@@ -43,9 +45,10 @@ const LoginRight = () => {
       
       // Simulate a backend call
       setTimeout(() => {
-        // Simulate successful login (for now)
         setLoading(false);
-        alert('Login successful (simulated)');
+        
+        // Redirect user to dashboard after successful login
+        navigate('/dashboard');
       }, 2000); // Adjust the time as needed
     }
   };

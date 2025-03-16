@@ -1,16 +1,27 @@
-// src/App.jsx
+import './app.css'; // Ensure this is at the top of your App.jsx or entry point
 import React from 'react';
-import './App.css';
-import LoginLeft from './components/LoginLeft';  // Import LoginLeft
-import LoginRight from './components/LoginRight';  // Import LoginRight
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import LoginRight from './components/LoginRight';
+import LoginLeft from './components/LoginLeft';
+import Dashboard from './components/Dashboard';
 
-function App() {
+const App = () => {
   return (
-    <div className="login-container">
-      <LoginLeft />  {/* Left side with image */}
-      <LoginRight />  {/* Right side with form */}
-    </div>
+    <Router>
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <div className="login-container">
+              <LoginLeft />  {/* Left side with image */}
+              <LoginRight />  {/* Right side with form */}
+            </div>
+          } 
+        />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
+    </Router>
   );
-}
+};
 
 export default App;
