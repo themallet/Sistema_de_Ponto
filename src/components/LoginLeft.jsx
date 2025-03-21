@@ -6,7 +6,9 @@ const LoginLeft = () => {
   return (
     <div
       className="login-left"
-      style={{ backgroundImage: `url(${bg})` }}
+      style={{
+        backgroundImage: `url(${bg})`,
+      }}
     ></div>
   );
 };
