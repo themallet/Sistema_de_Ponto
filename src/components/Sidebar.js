@@ -35,7 +35,7 @@ const styles = {
     profile: { textAlign: 'center', marginTop: '30px' },
     avatar: { width: '80px', height: '80px', borderRadius: '50%', marginBottom: '10px' },
     menu: { marginTop: '20px', display: 'flex', flexDirection: 'column' },
-    menuButton: { display: 'flex', alignItems: 'center', padding: '10px', background: '#007bff', color: '#fff', border: 'none', borderRadius: '5px', marginBottom: '10px', cursor: 'pointer' },
+    menuButton: { display: 'flex', alignItems: 'center', padding: '10px', background: '#007bff', color: ' #000000', border: 'none', borderRadius: '5px', marginBottom: '10px', cursor: 'pointer' },
     logout: { marginTop: 'auto' },
     logoutButton: { background: '#f44336', color: '#fff', border: 'none', padding: '10px', borderRadius: '5px', cursor: 'pointer' },
 };
