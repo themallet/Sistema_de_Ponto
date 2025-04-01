@@ -9,7 +9,10 @@ const LoginLeft = () => {
       style={{
         backgroundImage: `url(${bg})`,
       }}
-    ></div>
+      
+    >
+    
+    </div>
   );
 };
 

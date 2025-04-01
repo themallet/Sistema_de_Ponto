@@ -68,10 +68,12 @@ const LoginRight = () => {
   return (
     <div className="login-right">
       <div className="login-box">
-        <img src={logo} alt="Logo NewByte" className="logo" />
-        <h2>Bem Vindo!</h2>
-
+          <div className="logo-container">
+            <img src={logo} alt="Logo" className="logo" />
+            <span className="brand-name">NewByte</span>
+          </div>
         <form onSubmit={handleSubmit}>
+        <h2>Bem Vindo!</h2>
           <div>
             <input
               type="text"
