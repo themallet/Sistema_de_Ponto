@@ -1,37 +1,36 @@
 import React, { useState, useEffect } from 'react';
-import './Dashboard.css'; // We'll create this file for styling
-import logo from '../assets/simbolo_newbyte.png'; // Adjust path as needed
-import userAvatar from '../assets/user-avatar.png'; // Adjust path or use a placeholder
+import './Dashboard.css';
+import logo from '../assets/simbolo_newbyte.png';
+import userAvatar from '../assets/user-avatar.png';
 
 const Dashboard = () => {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [selectedYear, setSelectedYear] = useState("2025");
   const [selectedMonth, setSelectedMonth] = useState("Março");
 
-  // Update the clock every second
+  // Atualiza o relógio a cada segundo
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentTime(new Date());
     }, 1000);
-    
-    return () => {
-      clearInterval(timer);
-    };
+    return () => clearInterval(timer);
   }, []);
 
-  // Format the time as HH:MM AM/PM
-  const formatTime = (date) => {
-    return date.toLocaleTimeString('pt-BR', { 
-      hour: '2-digit', 
-      minute: '2-digit',
-      hour12: true 
-    });
-  };
+  // Formata a hora em HH:MM AM/PM
+  const formatTime = (date) => date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', hour12: true });
+
+  // Dados das métricas
+  const metrics = [
+    { title: "Pontualidade", value: "65%", change: "-25%", type: "negative", color: "green" },
+    { title: "Atrasos", value: "35%", change: "+35%", type: "positive", color: "red" },
+    { title: "Tempo de Intervalos", time: "00h 40min 55s", change: "-13%", type: "negative", color: "orange" },
+    { title: "Tempo Trabalhando", time: "00h 40min 55s", change: "+33%", type: "positive", color: "blue" },
+  ];
 
   return (
     <div className="dashboard-container">
       {/* Sidebar */}
-      <div className="sidebar">
+      <aside className="sidebar">
         <div className="logo">
           <img src={logo} alt="NewByte Logo" />
           <span>NewByte</span>
@@ -44,33 +43,21 @@ const Dashboard = () => {
         
         <nav className="navigation">
           <ul>
-            <li className="active">
-              <i className="icon-dashboard"></i>
-              <span>Dashboard</span>
-            </li>
-            <li>
-              <i className="icon-history"></i>
-              <span>Histórico</span>
-            </li>
-            <li>
-              <i className="icon-account"></i>
-              <span>Minha Conta</span>
-            </li>
+            <li className="active"><span>Dashboard</span></li>
+            <li><span>Histórico</span></li>
+            <li><span>Minha Conta</span></li>
           </ul>
         </nav>
         
-        <div className="logout">
-          <i className="icon-logout"></i>
-          <span>Sair</span>
-        </div>
-      </div>
+        <div className="logout"><span>Sair</span></div>
+      </aside>
       
       {/* Main Content */}
-      <div className="main-content">
-        <div className="header">
+      <main className="main-content">
+        <header className="header">
           <h1>Dashboard</h1>
           <div className="time">{formatTime(currentTime)}</div>
-        </div>
+        </header>
         
         {/* FeedBack Section */}
         <section className="feedback-section">
@@ -90,60 +77,23 @@ const Dashboard = () => {
             </div>
           </div>
           
+          {/* Métricas usando .map() */}
           <div className="metrics-grid">
-            {/* Pontualidade */}
-            <div className="metric-card">
-              <h3>Pontualidade</h3>
-              <div className="metric-content">
-                <div className="metric-data">
-                  <span className="month">Março</span>
-                  <div className="percentage">65%</div>
-                  <div className="comparison negative">-25% Em Comparação com Fevereiro</div>
+            {metrics.map((metric, index) => (
+              <div key={index} className="metric-card">
+                <h3>{metric.title}</h3>
+                <div className="metric-content">
+                  <div className="metric-data">
+                    {metric.value ? <div className="percentage">{metric.value}</div> : 
+                    <div className="time-value">{metric.time}</div>}
+                    <div className={`comparison ${metric.type}`}>
+                      {metric.change} Em Comparação com Fevereiro
+                    </div>
+                  </div>
+                  <div className={`chart ${metric.color}`}></div>
                 </div>
-                <div className="chart green"></div>
               </div>
-            </div>
-            
-            {/* Atrasos */}
-            <div className="metric-card">
-              <h3>Atrasos</h3>
-              <div className="metric-content">
-                <div className="metric-data">
-                  <span className="month">Março</span>
-                  <div className="percentage">35%</div>
-                  <div className="comparison positive">+35% Em Comparação com Fevereiro</div>
-                </div>
-                <div className="chart red"></div>
-              </div>
-            </div>
-            
-            {/* Tempo de Intervalos */}
-            <div className="metric-card">
-              <h3>Tempo de Intervalos / Março</h3>
-              <div className="metric-content">
-                <div className="metric-data">
-                  <div className="time-value">00 Hours</div>
-                  <div className="time-value">40 Minutes</div>
-                  <div className="time-value">55 Seconds</div>
-                  <div className="comparison negative">-13% Em Comparação com Fevereiro</div>
-                </div>
-                <div className="chart orange"></div>
-              </div>
-            </div>
-            
-            {/* Tempo Trabalhando */}
-            <div className="metric-card">
-              <h3>Tempo Trabalhando / Março</h3>
-              <div className="metric-content">
-                <div className="metric-data">
-                  <div className="time-value">00 Hours</div>
-                  <div className="time-value">40 Minutes</div>
-                  <div className="time-value">55 Seconds</div>
-                  <div className="comparison positive">+33% Em Comparação com Fevereiro</div>
-                </div>
-                <div className="chart blue"></div>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
         
@@ -176,9 +126,9 @@ const Dashboard = () => {
         </section>
         
         <footer className="footer">
-          <div className="copyright">Copyright © 2025 NewByte</div>
+          <div className="copyright">© 2025 NewByte</div>
         </footer>
-      </div>
+      </main>
     </div>
   );
 };
